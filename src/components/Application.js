@@ -2,62 +2,39 @@ import React, { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
-import axios from 'axios';
-
-const appointments = [
-  {
-    id: 1,
-    time: "12pm",
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      },
-    },
-  },
-  {
-    id: 3,
-    time: "2pm",
-    interview: {
-      student: "John Ramsey",
-      interviewer: {
-        id: 3,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      },
-    },
-  },
-];
+import { getAppointmentsForDay } from "helpers/selectors";
+import axios from "axios";
 
 
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
   });
 
-  const setDay = day => setState({ ...state, day });
-  const setDays = days => setState(prev => ({ ...prev, days }));
+  const setDay = (day) => setState({ ...state, day });
 
+  const appointments = getAppointmentsForDay(state, state.day).map(
+    (appointment) => {
+      return <Appointment key={appointment.id} {...appointment} />;
+    }
+  );
 
-  // const [day, setDay] = useState("Monday");
-  // const [days, setDays] = useState([]);
-
-useEffect(() => {
-  const url = "http://localhost:8001/api/days"
-  axios.get(url)
-  .then(res => {
-     setDays(res.data);
-    console.log(res.data)
-  })
-}, [state.days])
+  useEffect(() => {
+    Promise.all([
+      axios.get(`/api/days`),
+      axios.get(`/api/appointments`),
+      axios.get("/api/interviewers"),
+    ]).then((res) => {
+      setState((prev) => ({
+        ...prev,
+        days: res[0].data,
+        appointments: res[1].data,
+        interviewers: res[2].data,
+      }));
+    });
+  }, []);
 
   return (
     <main className="layout">
@@ -69,28 +46,16 @@ useEffect(() => {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          {/* <DayList days={days} day={day} setDay={setDay} /> */}
-          <DayList
-    days={state.days}
-    day={state.day}
-    setDay={setDay}
-/>
-
-
-
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
           alt="Lighthouse Labs"
         />
-
-        {/* Replace this with the sidebar elements during the "Project Setup & Familiarity" activity. */}
       </section>
       <section className="schedule">
-        {appointments.map((appointment) => {
-          return <Appointment key={appointment.id} {...appointment} />;
-        })}
+        {appointments}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
