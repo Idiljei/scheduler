@@ -18,8 +18,38 @@ export function getAppointmentsForDay(state, day) {
 } 
 
 
-// We need to start by finding the object in our state.days array who's name matches the provided day.
-//  With this information we can now access that specific days appointment array.
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
 
-// We should also probably do a bit of validation. If there are no appointments on the given day, 
-// our days data will be empty. According to our tests, in a case like this, we should return an empty array.
+  return {
+    student: interview.student,
+    interviewer: state.interviewers[interview.interviewer],
+  };
+}
+
+
+// The function should return a new object containing the interview data when we pass it an object that contains the interviewer.
+// Otherwise, the function should return null. The object it returns should look like this:
+
+
+// export function getInterviewsForDay(state, day) {
+//   const filteredAppointments = [];
+//   state.days.forEach(element => {
+//     if (element.name === day) {
+//       element.interviewers.forEach(id => {
+//         filteredAppointments.push(state.interviewers[id]); //[1,2,3]
+//       });
+//     }
+//   });
+//   return filteredAppointments;
+// } 
+
+export function getInterviewersForDay(state, day) {
+  const foundDay = state.days.find((days) => days.name === day);
+  if (state.days.length === 0 || foundDay === undefined) {
+    return [];
+  }
+  return foundDay.interviewers.map((id) => state.interviewers[id]);
+}
