@@ -43,7 +43,7 @@ export default function Appointment(props) {
     })
     .catch(error => transition(ERROR_SAVE));
   }
-
+//where is the error?
 
 //CANCEL FUNCTION 
   function cancel() {
