@@ -13,8 +13,32 @@ export default function useApplicationData(props) {
 
   const setDay = (day) => setState({ ...state, day });
 
+  const updateSpots = function(day, days, appointments) { 
+    //find appointments for the day and find which appointment has a null interview (which means those spots are available)
 
-  const bookInterview = (id, interview) => {
+    //find day object 
+    const dayObj = days.find(item => item.name = day); //find day
+    const appointmentsIds =  dayObj.appointments; 
+
+    //when we find day object we have array of appointments  //iterate its appointments array
+    let spots = 0; 
+    for(const id of appointmentsIds) {
+      const appointment = appointments [id]; // grabs the appointment by the id 
+      if(!appointment.interview) {
+        spots++;  // if its null add spots 
+      }
+    }
+    // for each item in the array - if the interview is null (that's a spot) results spots++
+    //update teh spots in the day object  --> which is part of days 
+    //return days 
+    dayObj.spots = spots; 
+
+  }
+
+
+
+
+  const bookInterview = (id, interview) => {  
     console.log("ID, INTERVIEW", id, interview);
     const appointment = {
       ...state.appointments[id],
@@ -28,7 +52,11 @@ export default function useApplicationData(props) {
     return axios
       .put(`/api/appointments/${id}`, appointment)
       .then((res) => {
-        setState({ ...state, appointments }); //set state when you confirm the database gets updated in promise
+        const days = [...state.days] //new days 
+        updateSpots(state.day, days, appointments) //ADDED THIS IN 
+
+
+        setState({ ...state, appointments, days  }); //set state when you confirm the database gets updated in promise
         console.log(res.data);
       })
   };

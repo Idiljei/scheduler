@@ -30,7 +30,7 @@ export default function Appointment(props) {
 
   //SAVING FUNCTION 
 
-  function save(name, interviewer) {
+  function save(name, interviewer) {  //onSave it wil return a name and interviewer 
     const interview = {
       student: name,
       interviewer,
@@ -39,7 +39,7 @@ export default function Appointment(props) {
 
     transition(SAVING); //shows loading before interview booked
     props
-    .bookInterview(props.id, interview)
+    .bookInterview(props.id, interview) 
     .then(() => {
       transition(SHOW) 
     })
