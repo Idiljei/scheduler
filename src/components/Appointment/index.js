@@ -4,40 +4,89 @@ import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Form from "components/Appointment/Form";
+import Status from "components/Appointment/Status";
+import Confirm from "components/Appointment/Confirm";
+
 
 import useVisualMode from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
-
+const SAVING = "SAVING";
+const DELETING = "DELETING";
+const CONFIRM = "CONFIRMING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer,
+    };
+    console.log("INTERVIEW", interview)
+
+    transition(SAVING); //shows loading before interview booked 
+    props.bookInterview(props.id,interview )
+    .then(() => {
+      transition("SHOW"); //once the promise resolves we will transition to show 
+    }) //bc we have interview object we can transition to show
+
+    
+  }
+
+  function cancel ()  {
+
+    console.log("CANCELLLL")
+    transition(DELETING); //DONT FORGET TO TRANSITION!!!!!!!!!
+    props.cancelInterview(props.id)
+    .then(() => {
+      transition("EMPTY"); //once the promise resolves we will transition to show 
+    }) //bc we have interview object we can transition to show
+  }
+
+
+
+
+
+
   return (
     <article className="appointment">
       <Header time={props.time} />
 
       {mode === EMPTY && <Empty onAdd={() => transition("CREATE")} />}
+      {mode === SAVING && <Status message= "Saving Interview" />}
+      {mode === DELETING && <Status message= "Deleting Interview" />}
+
+      {mode === CONFIRM && 
+        <Confirm
+        message="Delete the appointment?"
+        onCancel={back} 
+        onConfirm={cancel}
+        />}
+
+
 
       {mode === CREATE && (
         <Form
           name={""}
-          interviewers={[]}
+          interviewers={props.interviewers}
           interviewer={{}}
-          onSave={() => console.log("onSave")} //will update with info from database
+          onSave={save} //will update with info from database
           onCancel={() => back()}
+          
         />
       )}
       {mode === SHOW && (
         <Show
-          student={props.interview.student}
-          interviewer={props.interview.interviewer}
-          onEdit={() => console.log("onEdit")}
-          onDelete={() => console.log("onDelete")}
+        student={props.interview.student}
+        interviewer={props.interview.interviewer}
+        onEdit={() => console.log("onEdit")}
+        onDelete={() => transition(CONFIRM)}
+
         />
       )}
     </article>
