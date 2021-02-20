@@ -28,6 +28,7 @@ export default function Appointment(props) {
 
 
   //SAVING FUNCTION 
+
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -41,14 +42,14 @@ export default function Appointment(props) {
     .then(() => {
       transition(SHOW) 
     })
-    .catch(error => transition(ERROR_SAVE));
+    .catch(error => transition(ERROR_SAVE,true));
   }
 //where is the error?
 
-//CANCEL FUNCTION 
+// CANCEL FUNCTION 
   function cancel() {
     console.log("CANCELLLL");
-    transition(DELETING); //DONT FORGET TO TRANSITION!!!!!!!!!
+    transition(DELETING, true); //DONT FORGET TO TRANSITION!!!!!!!!!
     props
       .cancelInterview(props.id)
       .then(() => {
@@ -56,6 +57,7 @@ export default function Appointment(props) {
       })
       .catch((error) => transition(ERROR_DELETE, true));
   }
+
 
   return (
     <article className="appointment">

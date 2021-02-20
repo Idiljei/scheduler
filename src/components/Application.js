@@ -39,9 +39,6 @@ export default function Application(props) {
         setState({ ...state, appointments }); //set state when you confirm the database gets updated in promise
         console.log(res.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const cancelInterview = (id) => {
@@ -60,11 +57,7 @@ export default function Application(props) {
         setState({ ...state, appointments }); //set state when you confirm the database gets updated in promise
         console.log("DELETE", res.data);
       })
-      .catch((error) => {
-        setState({ ...state, appointments });
-        console.log("FIND MEEEE")
-        // console.log(error);
-      });
+      
   };
 
   const schedule = appointments.map((appointment) => {

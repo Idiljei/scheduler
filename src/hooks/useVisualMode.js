@@ -13,7 +13,7 @@ export default function useVisualMode(initial) {
         //[EMPTY, EDIT]
         //[EMPTY, CREATE] 
         // "newMode", "replace"
-        ``
+        
       )
     } else {  // calling transition for non replace  transition("EDIT, false") //if Edit is false we're gonna add to it
       setHistory(prev => 
