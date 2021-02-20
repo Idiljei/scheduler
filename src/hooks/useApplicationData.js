@@ -34,7 +34,7 @@ export default function useApplicationData(props) {
     //return days
 
   //  const newDayObj = {...dayObj}
-    dayObj.spots = spots;      //changing dayObj so make a copy 
+    dayObj.spots = spots;      //this should have a copy made
 
     const newDays = [...days]  //new array with ourdays 
     return newDays;
