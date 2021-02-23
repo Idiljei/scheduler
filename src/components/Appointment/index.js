@@ -66,7 +66,7 @@ export default function Appointment(props) {
       <Header time={props.time} />
 
       {mode === EMPTY && <Empty onAdd={() => transition("CREATE")} />}
-      {mode === SAVING && <Status message="Saving Interview" />}
+      {mode === SAVING && <Status message="Saving" />}
       {mode === DELETING && <Status message="Deleting Interview" />}
 
       {mode === CONFIRM && (

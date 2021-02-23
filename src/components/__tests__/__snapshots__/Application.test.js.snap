@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application loads data, books an interview and reduces the spots remaining for Monday by 1: Saving 1`] = `
+<header
+  class="appointment__time"
+>
+  <h4
+    class="text--semi-bold"
+  >
+    12pm
+  </h4>
+  <hr
+    class="appointment__separator"
+  />
+</header>
+`;
