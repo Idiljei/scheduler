@@ -1,5 +1,5 @@
 # Interview Scheduler
-!["Scheduler Demo"](https://github.com/Idiljei/scheduler/blob/master/public/Scheduler%20App%20Demo.mov) 
+!["Scheduler Demo"](https://github.com/Idiljei/scheduler/blob/master/public/images/Scheduler%20App%20Demo.mov) 
 !["Create new appointment"](https://github.com/Idiljei/scheduler/blob/master/public/images/sched1.png) 
 !["Entering name and selecting Interviewer"](https://github.com/Idiljei/scheduler/blob/master/public/images/sched2.png)
 !["New Appointment created"](https://github.com/Idiljei/scheduler/blob/master/public/images/sched3.png)
