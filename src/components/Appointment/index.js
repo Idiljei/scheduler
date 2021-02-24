@@ -35,7 +35,6 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    console.log("INTERVIEW", interview);
 
     transition(SAVING); //shows loading before interview booked
     props
