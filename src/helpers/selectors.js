@@ -1,22 +1,22 @@
 export function getAppointmentsForDay(state, day) {
-  const filteredAppointments = []; //empty array to push state.days object 
+  const filteredAppointments = [];
 
+  state.days.forEach((element) => {
+    //step 1 loops through array to grab the objects
 
-  state.days.forEach(element => { //loops through array to grab the objects 
+    if (element.name === day) {
+      // Step 2 if the day i.e "monday" matches the  state.days  name
 
+      element.appointments.forEach((id) => {
+        // Step 3looping over appointments array inside the object
 
-    if (element.name === day) { // if the day i.e "monday" matches the  state.days  name  
-
-      element.appointments.forEach(id => { //looping over appointments array inside the object 
-
-        filteredAppointments.push(state.appointments[id]); //comparing where it's id matches the id of states.appointments and return that value.
-
+        filteredAppointments.push(state.appointments[id]);
+        // Step 4 comparing where it's id matches the id of states.appointments and return that value.
       });
     }
   });
   return filteredAppointments;
-} 
-
+}
 
 export function getInterview(state, interview) {
   if (!interview) {
@@ -28,23 +28,6 @@ export function getInterview(state, interview) {
     interviewer: state.interviewers[interview.interviewer],
   };
 }
-
-
-// The function should return a new object containing the interview data when we pass it an object that contains the interviewer.
-// Otherwise, the function should return null. The object it returns should look like this:
-
-
-// export function getInterviewsForDay(state, day) {
-//   const filteredAppointments = [];
-//   state.days.forEach(element => {
-//     if (element.name === day) {
-//       element.interviewers.forEach(id => {
-//         filteredAppointments.push(state.interviewers[id]); //[1,2,3]
-//       });
-//     }
-//   });
-//   return filteredAppointments;
-// } 
 
 export function getInterviewersForDay(state, day) {
   const foundDay = state.days.find((days) => days.name === day);

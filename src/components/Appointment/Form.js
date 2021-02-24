@@ -26,8 +26,8 @@ export default function Form(props) {
       return;
     }
 
-  setError("");
-  props.onSave(name, interviewer);
+    setError("");
+    props.onSave(name, interviewer);
   }
   return (
     <main className="appointment__card appointment__card--create">

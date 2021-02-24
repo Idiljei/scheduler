@@ -8,8 +8,6 @@ import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error";
 
-
-
 import useVisualMode from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
@@ -27,10 +25,9 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  //SAVING FUNCTION
 
-  //SAVING FUNCTION 
-
-  function save(name, interviewer) {  //onSave it wil return a name and interviewer 
+  function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer,
@@ -38,18 +35,17 @@ export default function Appointment(props) {
 
     transition(SAVING); //shows loading before interview booked
     props
-    .bookInterview(props.id, interview) 
-    .then(() => {
-      transition(SHOW) 
-    })
-    .catch(error => transition(ERROR_SAVE,true));
+      .bookInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch((error) => transition(ERROR_SAVE, true));
   }
-//where is the error?
 
-// CANCEL FUNCTION 
+  // CANCEL FUNCTION
   function cancel() {
     console.log("CANCELLLL");
-    transition(DELETING, true); //DONT FORGET TO TRANSITION!!!!!!!!!
+    transition(DELETING, true);
     props
       .cancelInterview(props.id)
       .then(() => {
@@ -58,10 +54,8 @@ export default function Appointment(props) {
       .catch((error) => transition(ERROR_DELETE, true));
   }
 
-
   return (
     <article className="appointment" data-testid="appointment">
-      
       <Header time={props.time} />
 
       {mode === EMPTY && <Empty onAdd={() => transition("CREATE")} />}
@@ -109,11 +103,14 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && (
         <Error
           message="Appointment did not save, please try again"
-          onClose={back} 
+          onClose={back}
         />
       )}
       {mode === ERROR_DELETE && (
-        <Error message="Appointment did not cancel, please try again" onClose={back} />
+        <Error
+          message="Appointment did not cancel, please try again"
+          onClose={back}
+        />
       )}
     </article>
   );
