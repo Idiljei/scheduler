@@ -1,4 +1,8 @@
 # Interview Scheduler
+!["Create new appointment"]() 
+!["Entering name and selecting Interviewer"]()
+!["New Appointment created"]()
+
 
 ## Setup
 
