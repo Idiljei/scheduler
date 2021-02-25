@@ -26,11 +26,8 @@ export default function useApplicationData(props) {
         spots++; // if its null add spots
       }
     }
-    // for each item in the array - if the interview is null (that's a spot) results spots++
-    //update teh spots in the day object  --> which is part of days
-    //return days
-
-    dayObj.spots = spots; //this should have a copy made
+    //update the spots in the day object (days)
+    dayObj.spots = spots;
 
     const newDays = [...days]; //new array with ourdays
     return newDays;
@@ -56,19 +53,17 @@ export default function useApplicationData(props) {
   const cancelInterview = (id) => {
     const appointment = {
       ...state.appointments[id],
-      interview: null, //no need to create a new inerview obj
+      interview: null,
     };
     const appointments = {
       ...state.appointments,
       [id]: appointment, //new appointment or null
     };
 
-    return axios
-      .delete(`/api/appointments/${id}`) //dont pass appointment as second param - only delete key
-      .then((res) => {
-        const days = updateSpots(state.day, state.days, appointments);
-        setState({ ...state, appointments }); //set state when you confirm the database gets updated in promise
-      });
+    return axios.delete(`/api/appointments/${id}`).then((res) => {
+      const days = updateSpots(state.day, state.days, appointments);
+      setState({ ...state, appointments }); //set state when you confirm the database gets updated in promise
+    });
   };
 
   useEffect(() => {
