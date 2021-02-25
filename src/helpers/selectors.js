@@ -3,7 +3,6 @@ export function getAppointmentsForDay(state, day) {
   if (state.days.length === 0 || foundDay === undefined) {
     return [];
   }
-
   return foundDay.appointments.map((id) => state.appointments[id]);
 }
 
