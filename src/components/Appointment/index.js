@@ -73,7 +73,7 @@ export default function Appointment(props) {
           name={""}
           interviewers={props.interviewers}
           interviewer={{}}
-          onSave={save} //will update with info from database
+          onSave={save} 
           onCancel={() => back()}
         />
       )}
