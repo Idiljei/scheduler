@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData(props) {
@@ -61,7 +61,7 @@ export default function useApplicationData(props) {
     };
 
     return axios.delete(`/api/appointments/${id}`).then((res) => {
-      const days = updateSpots(state.day, state.days, appointments);
+      updateSpots(state.day, state.days, appointments);
       setState({ ...state, appointments }); //set state when you confirm the database gets updated in promise
     });
   };
