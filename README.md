@@ -5,7 +5,7 @@
 !["New Appointment created"](https://github.com/Idiljei/scheduler/blob/master/public/images/sched3.png)
 
 ## Dependencies 
-
+```sh
 Axios
 Classnames
 Normalize.css
@@ -25,6 +25,7 @@ Babel-loader
 Node-sass
 Prop-types
 React-test-renderer
+```
 
 ## Setup
 
