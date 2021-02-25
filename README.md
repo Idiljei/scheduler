@@ -1,7 +1,11 @@
 # Interview Scheduler
+- Scheduler Demo 
 !["Scheduler Demo"](https://github.com/Idiljei/scheduler/blob/master/public/images/Scheduler%20App%20Demo.gif) 
+- Main Page 
 !["Create new appointment"](https://github.com/Idiljei/scheduler/blob/master/public/images/sched1.png) 
+- Creating appointment and selecting interviewer  
 !["Entering name and selecting Interviewer"](https://github.com/Idiljei/scheduler/blob/master/public/images/sched2.png)
+- New appointment created 
 !["New Appointment created"](https://github.com/Idiljei/scheduler/blob/master/public/images/sched3.png)
 
 ## Dependencies 
