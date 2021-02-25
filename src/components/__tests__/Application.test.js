@@ -97,7 +97,6 @@ describe("Application", () => {
   });
 
   //   EDITS
-
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     const { container, debug } = render(<Application />);
 
