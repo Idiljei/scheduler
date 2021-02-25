@@ -47,7 +47,6 @@ describe("Application", () => {
     fireEvent.click(getByText(appointment, "Save"));
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
-    console.log(prettyDOM(appointment));
 
     // Wait for the save operation to complete and confirm students name before showing
     await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));

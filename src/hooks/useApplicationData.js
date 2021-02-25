@@ -30,7 +30,6 @@ export default function useApplicationData(props) {
     //update teh spots in the day object  --> which is part of days
     //return days
 
-    //  const newDayObj = {...dayObj}
     dayObj.spots = spots; //this should have a copy made
 
     const newDays = [...days]; //new array with ourdays
@@ -38,7 +37,6 @@ export default function useApplicationData(props) {
   };
 
   const bookInterview = (id, interview) => {
-    console.log("ID, INTERVIEW", id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -52,7 +50,6 @@ export default function useApplicationData(props) {
       const days = updateSpots(state.day, state.days, appointments);
 
       setState({ ...state, appointments, days }); //set state when you confirm the database gets updated in promise
-      console.log(res.data);
     });
   };
 
@@ -71,12 +68,10 @@ export default function useApplicationData(props) {
       .then((res) => {
         const days = updateSpots(state.day, state.days, appointments);
         setState({ ...state, appointments }); //set state when you confirm the database gets updated in promise
-        console.log("DELETE", res.data);
       });
   };
 
   useEffect(() => {
-    console.log(state.interviewers);
     Promise.all([
       axios.get(`/api/days`),
       axios.get(`/api/appointments`),

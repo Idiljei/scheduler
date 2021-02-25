@@ -7,7 +7,6 @@ import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error";
-
 import useVisualMode from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
@@ -44,7 +43,6 @@ export default function Appointment(props) {
 
   // CANCEL FUNCTION
   function cancel() {
-    console.log("CANCELLLL");
     transition(DELETING, true);
     props
       .cancelInterview(props.id)
@@ -94,7 +92,6 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onEdit={() => console.log("onEdit")}
           onEdit={() => transition(EDIT)}
           onDelete={() => transition(CONFIRM)}
         />

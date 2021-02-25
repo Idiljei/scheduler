@@ -1,21 +1,10 @@
 export function getAppointmentsForDay(state, day) {
-  const filteredAppointments = [];
+  const foundDay = state.days.find((days) => days.name === day);
+  if (state.days.length === 0 || foundDay === undefined) {
+    return [];
+  }
 
-  state.days.forEach((element) => {
-    //step 1 loops through array to grab the objects
-
-    if (element.name === day) {
-      // Step 2 if the day i.e "monday" matches the  state.days  name
-
-      element.appointments.forEach((id) => {
-        // Step 3looping over appointments array inside the object
-
-        filteredAppointments.push(state.appointments[id]);
-        // Step 4 comparing where it's id matches the id of states.appointments and return that value.
-      });
-    }
-  });
-  return filteredAppointments;
+  return foundDay.appointments.map((id) => state.appointments[id]);
 }
 
 export function getInterview(state, interview) {
